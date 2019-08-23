@@ -28,3 +28,17 @@ nav ul li a {
 main > section > div > header > h1 {
   font-size: 40px;
 }
+
+table{
+  text-align: center;
+  line-height: 1em;
+  
+}
+tr img {
+  height: 50px;
+  margin: 0 5px;
+}
+
+tr td {
+  width: 15px;
+}

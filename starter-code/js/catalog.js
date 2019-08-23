@@ -24,29 +24,69 @@ function populateForm() {
 function handleSubmit(e) {
   e.preventDefault();
 
+  var itemChosen = e.target.items.value;
+  var quantity = e.target.quantity.value;
+
   // Do all the things ...
-  addSelectedItemToCart();
+  addSelectedItemToCart(itemChosen, quantity);
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
 
 }
 
-// TODO: Add the selected item and quantity to the cart
-function addSelectedItemToCart() {
-  // TODO: suss out the item picked from the select list
-  
-  // TODO: get the quantity
-  // TODO: using those, add one item to the Cart
+//  Add the selected item and quantity to the cart
+function addSelectedItemToCart(itemSelected, quantity) {
+  // suss out the item picked from the select list
+  for (var i = 0; i < Product.allProducts.length; i++){
+    if (itemSelected === Product.allProducts[i].name){
+      var choice = Product.allProducts[i];
+    }
+  }
+  //  get the quantity
+  //  using those, add one item to the Cart
+  cart.addItem(choice, quantity);
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+// : Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() {
+  var itemCount = document.getElementById('itemCount');
+  var savedCart = JSON.parse(localStorage.getItem('cart'));
+  
+  var totalItems = 0;
+  for (var i = 0; i < savedCart.length; i++){
+    totalItems += parseInt(savedCart[i].quantity);
+  }
+
+  itemCount.textContent = 'Items in Cart: ' + totalItems;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
+  var itemCount = document.getElementById('cartContents');
+  while (itemCount.firstChild){
+    itemCount.removeChild(itemCount.firstChild);
+  }
+
+  var savedCart = JSON.parse(localStorage.getItem('cart'));
   // TODO: Add a new element to the cartContents div with that information
+  var elTable = document.createElement('table');
+  for (var i = 0; i < savedCart.length; i++){
+    var elTr = document.createElement('tr');
+    var img = document.createElement('img');
+    img.src = savedCart[i].product.filePath;
+    elTr.appendChild(img);
+
+    var elTd1 = document.createElement('td');
+    elTd1.textContent = savedCart[i].product.name;
+    elTr.appendChild(elTd1);
+    var elTd2 = document.createElement('td');
+    elTd2.textContent = savedCart[i].quantity;
+    elTr.appendChild(elTd2);
+    elTable.appendChild(elTr);
+  }
+  itemCount.appendChild(elTable);
 }
 
 // Set up the "submit" event listener on the form.
