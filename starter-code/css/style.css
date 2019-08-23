@@ -1,1 +1,44 @@
 /* TODO: Make it awesome */
+* {
+  text-align: center;
+  font-family: sans-serif;
+  outline: orange dotted 1px;
+}
+
+header {
+  background: lightskyblue;
+  color: #000;
+
+}
+header > h1 {
+  font-size: 60px;
+  font-family: sans-serif;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+  font-size: 30px;
+}
+
+nav ul li a {
+  text-decoration: none;
+}
+
+main > section > div > header > h1 {
+  font-size: 40px;
+}
+
+table{
+  text-align: center;
+  line-height: 1em;
+  
+}
+tr img {
+  height: 50px;
+  margin: 0 5px;
+}
+
+tr td {
+  width: 15px;
+}
